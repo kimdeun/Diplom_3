@@ -54,4 +54,24 @@ public class PersonalAccountPageTest extends BaseTest {
         wait.until(ExpectedConditions.urlToBe("https://stellarburgers.nomoreparties.site/login"));
         assertEquals("https://stellarburgers.nomoreparties.site/login", loginPage.getLink());
     }
+
+    @Test
+    @DisplayName("Проверяем переход в конструктор через кнопку \"Конструктор\"")
+    public void checkingLinkToTheConstructorByConstructorButton() {
+        homePage.clickOnTheButtonToPersonalAccount();
+        WebDriverWait wait = new WebDriverWait(driver, 5);
+        wait.until(ExpectedConditions.urlToBe("https://stellarburgers.nomoreparties.site/account/profile"));
+        personalAccountPage.clickConstructorButton();
+        assertEquals("https://stellarburgers.nomoreparties.site/", personalAccountPage.getLink());
+    }
+
+    @Test
+    @DisplayName("Проверяем переход в конструктор через нажатие по лого")
+    public void checkingLinkToTheConstructorByLogoButton() {
+        homePage.clickOnTheButtonToPersonalAccount();
+        WebDriverWait wait = new WebDriverWait(driver, 5);
+        wait.until(ExpectedConditions.urlToBe("https://stellarburgers.nomoreparties.site/account/profile"));
+        personalAccountPage.clickLogo();
+        assertEquals("https://stellarburgers.nomoreparties.site/", personalAccountPage.getLink());
+    }
 }
