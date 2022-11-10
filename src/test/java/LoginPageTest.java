@@ -1,13 +1,12 @@
+import constants.URLs;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.Test;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import pageObject.HomePage;
-import pageObject.LoginPage;
-import pageObject.PasswordRecoveryPage;
-import pageObject.RegistrationPage;
-
-import java.util.Random;
+import pageobject.HomePage;
+import pageobject.LoginPage;
+import pageobject.PasswordRecoveryPage;
+import pageobject.RegistrationPage;
 
 import static org.junit.Assert.assertEquals;
 
@@ -17,21 +16,6 @@ public class LoginPageTest extends BaseTest {
     PasswordRecoveryPage passwordRecoveryPage = new PasswordRecoveryPage(driver);
     RegistrationPage registrationPage = new RegistrationPage(driver);
 
-    private Random random = new Random();
-    String name = "userName" + random.nextInt(30000);
-    String email = "userEmail" + random.nextInt(30000) + "@gmail.com";
-    String password = "userPassword" + random.nextInt(30000);
-
-    public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "D:/WebDriver/bin/chromedriver.exe");
-        driver.get("https://stellarburgers.nomoreparties.site/register");
-        driver.manage().window().maximize();
-
-        registrationPage.userRegistration(name, email, password);
-        WebDriverWait wait = new WebDriverWait(driver, 5);
-        wait.until(ExpectedConditions.urlToBe("https://stellarburgers.nomoreparties.site/login"));
-    }
-
     @Test
     @DisplayName("Проверяем, что можно авторизоваться с начальной страницы с помощью кнопки \"Войти в аккаунт\"")
     public void userLoginFromTheHomePageByLoginButton() {
@@ -39,8 +23,8 @@ public class LoginPageTest extends BaseTest {
         homePage.clickOnTheAccountLoginButton();
         loginPage.userLogin(email, password);
         WebDriverWait wait = new WebDriverWait(driver, 5);
-        wait.until(ExpectedConditions.urlToBe("https://stellarburgers.nomoreparties.site/"));
-        assertEquals("https://stellarburgers.nomoreparties.site/", homePage.getLink());
+        wait.until(ExpectedConditions.urlToBe(URLs.HOME_PAGE_URL));
+        assertEquals(URLs.HOME_PAGE_URL, homePage.getLink());
     }
 
     @Test
@@ -50,8 +34,8 @@ public class LoginPageTest extends BaseTest {
         homePage.clickOnTheButtonToPersonalAccount();
         loginPage.userLogin(email, password);
         WebDriverWait wait = new WebDriverWait(driver, 5);
-        wait.until(ExpectedConditions.urlToBe("https://stellarburgers.nomoreparties.site/"));
-        assertEquals("https://stellarburgers.nomoreparties.site/", homePage.getLink());
+        wait.until(ExpectedConditions.urlToBe(URLs.HOME_PAGE_URL));
+        assertEquals(URLs.HOME_PAGE_URL, homePage.getLink());
     }
 
     @Test
@@ -61,8 +45,8 @@ public class LoginPageTest extends BaseTest {
         registrationPage.clickLoginButton();
         loginPage.userLogin(email, password);
         WebDriverWait wait = new WebDriverWait(driver, 5);
-        wait.until(ExpectedConditions.urlToBe("https://stellarburgers.nomoreparties.site/"));
-        assertEquals("https://stellarburgers.nomoreparties.site/", homePage.getLink());
+        wait.until(ExpectedConditions.urlToBe(URLs.HOME_PAGE_URL));
+        assertEquals(URLs.HOME_PAGE_URL, homePage.getLink());
     }
 
     @Test
@@ -72,7 +56,7 @@ public class LoginPageTest extends BaseTest {
         passwordRecoveryPage.clickToTheLoginButton();
         loginPage.userLogin(email, password);
         WebDriverWait wait = new WebDriverWait(driver, 5);
-        wait.until(ExpectedConditions.urlToBe("https://stellarburgers.nomoreparties.site/"));
-        assertEquals("https://stellarburgers.nomoreparties.site/", homePage.getLink());
+        wait.until(ExpectedConditions.urlToBe(URLs.HOME_PAGE_URL));
+        assertEquals(URLs.HOME_PAGE_URL, homePage.getLink());
     }
 }
