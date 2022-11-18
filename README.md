@@ -3,3 +3,4 @@
 * JUnit4
 * Page Object
 * Selenium
+* Allure
